@@ -1,22 +1,29 @@
-using System.Collections.Generic;
+using System;
+using System.Collections.Generic; 
+using System.ComponentModel.DataAnnotations; 
 
 namespace MyRecipes.Models
 {
-    public class UserRecipe
+  public class UserRecipe
+  {
+    public UserRecipe()
     {
-      public UserRecipe()
-      {
-        this.JoinEntities = new HashSet<CategoryUserRecipe>;
-      }
-
-      public int UserRecipeId { get; set; }
-      public string RecipeName { get; set; }
-      public string IngredientList { get; set; }
-      public int RecipeRating { get; set; }
-
-      public virtual ICollection<CategoryUserRecipe> JoinEntities { get; }
+      this.JoinEntities = new HashSet<CategoryUserRecipe>();
     }
 
+    [Display(Name = "Recipe ID")]
+    public int UserRecipeId { get; set; }
 
-    }
+    [Display(Name = "Recipe Name")]
+    public string RecipeName { get; set; }
+
+    [Display(Name = "Ingredients")]
+    public string IngredientList { get; set; }
+
+    [Display(Name = "Rating")]
+    public int RecipeRating { get; set; }
+
+    public virtual ICollection<CategoryUserRecipe> JoinEntities { get; }
+  }
 }
+
