@@ -23,7 +23,13 @@ namespace MyRecipes.Controllers
     public ActionResult Index()
     {
       return View(_db.UserRecipes.ToList());
+    }
+
+    [HttpGet]
+    public ActionResult Create()
+    {
       
+      return View();
     }
   }
 }

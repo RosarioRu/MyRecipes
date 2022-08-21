@@ -20,10 +20,11 @@ namespace MyRecipes.Models
     [Display(Name = "Ingredients")]
     public string IngredientList { get; set; }
 
-    [Display(Name = "Rating")]
+    [Display(Name = "0-5 Star Rating")]
     public int RecipeRating { get; set; }
 
     public virtual ICollection<CategoryUserRecipe> JoinEntities { get; }
   }
 }
 
+ 
