@@ -19,9 +19,8 @@
   @Html.Label("Give recipe a rating from 0-5")
   @Html.DropDownListFor(m => m.RecipeRating, Enumerable.Range(0,5).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
 
-
-  @* @Html.Label("Select a category for this recipe")
-  @Html.DropDownList("CategoryId") *@
+  @Html.Label("Select a category for this recipe")
+  @Html.DropDownList("CategoryId")
 
   <input type="submit" value="Add to my recipe box" class="btn" />
 }

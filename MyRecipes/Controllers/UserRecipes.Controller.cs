@@ -28,8 +28,23 @@ namespace MyRecipes.Controllers
     [HttpGet]
     public ActionResult Create()
     {
-      
+      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");//might put this in edit() so that user can add multiple categories not just ONE...at one time
       return View();
     }
+
+    [HttpPost]
+    public ActionResult Create(UserRecipe userRecipe, int CategoryId)
+    {
+      _db.UserRecipes.Add(userRecipe);
+      _db.SaveChanges();
+      if (CategoryId != 0)
+      {
+        _db.CategoryUserRecipes.Add(new CategoryUserRecipe() { CategoryId = CategoryId, UserRecipeId = userRecipe.UserRecipeId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Index");
+    }
+
+
   }
 }
