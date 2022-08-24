@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+@model MyRecipes.Models.UserRecipe
+
+<h5>Are you sure you want to delete your <strong>@Model.RecipeName</strong> recipe?</h5>
+<br>
+@using (Html.BeginForm())//this creates a POST request to an action method whose name matches the cshtml file... so creates a POST request to Delete action/view.
+{
+  <input type="submit" value="Yes, I'm sure" />
+}
+<br>
+@Html.ActionLink("Never mind", "Index")

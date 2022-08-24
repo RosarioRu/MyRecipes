@@ -81,6 +81,21 @@ namespace MyRecipes.Controllers
       return RedirectToAction("Index");
     }
 
+    [HttpGet]
+    public ActionResult Delete(int id)
+    {
+      var thisUserRecipe = _db.UserRecipes.FirstOrDefault(UserRecipe => UserRecipe.UserRecipeId == id);
+      return View(thisUserRecipe);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      var recipeToDelete = _db.UserRecipes.FirstOrDefault(UserRecipe => UserRecipe.UserRecipeId == id);
+      _db.UserRecipes.Remove(recipeToDelete);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
 
   }
 }
