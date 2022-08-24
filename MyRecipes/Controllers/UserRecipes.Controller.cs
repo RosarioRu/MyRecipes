@@ -61,6 +61,26 @@ namespace MyRecipes.Controllers
       return View(thisUserRecipe);
     }
 
+    [HttpGet]
+    public ActionResult Edit(int id)
+    {
+      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+      var recipeToDisplay = _db.UserRecipes.FirstOrDefault(UserRecipe => UserRecipe.UserRecipeId == id);
+      return View(recipeToDisplay);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(UserRecipe recipeToEdit, int CategoryId)
+    {
+      if (CategoryId != 0)
+      {
+        _db.CategoryUserRecipes.Add(new CategoryUserRecipe() { CategoryId = CategoryId, UserRecipeId = recipeToEdit.UserRecipeId});
+      }
+      _db.Entry(recipeToEdit).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
 
   }
 }

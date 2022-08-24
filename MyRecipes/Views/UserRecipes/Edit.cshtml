@@ -1,0 +1,49 @@
+@{
+  Layout = "_Layout";
+}
+
+@model MyRecipes.Models.UserRecipe
+<br>
+<h3>Edit @Model.RecipeName Recipe Below</h3>
+<br>
+@using (Html.BeginForm())
+{
+<table class="table">
+  <tbody>
+    @Html.HiddenFor(model => model.UserRecipeId)
+    <tr>
+      <td>
+        @Html.LabelFor(model => model.RecipeName)
+        @Html.EditorFor(model => model.RecipeName)
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(model => model.IngredientList)
+        @Html.EditorFor(model => model.IngredientList)
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(model => model.RecipeRating)
+        @Html.DropDownListFor(m => m.RecipeRating, Enumerable.Range(0,6).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.Label("Select a category for this recipe")
+        @Html.DropDownList("CategoryId")
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="submit" value="Update Recipe" />
+      </td>
+    </tr>
+  </tbody>
+</table>
+}
+<br>
+
+
+<p>@Html.ActionLink("Never mind", "Index")</p>
