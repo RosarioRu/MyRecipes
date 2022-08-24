@@ -7,7 +7,44 @@
 
 @model MyRecipes.Models.UserRecipe //model directive tells our views what type of data will be passed into the view from the controller route. In this case we're telling the view that it will receive a model that is an Item.
 
-<h4>Add a Recipe</h4>
+<br>
+<h1>Add a Recipe</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">@Html.LabelFor(model => model.RecipeName)</th>
+        <th scope="col">@Html.LabelFor(model => model.IngredientList)<span class="example"><br>Use commas to separate ingredients: 2c sugar, 3 carrots</span></th>
+        <th scope="col">@Html.Label("Give recipe a rating from 0-5")</th>
+        <th scope="col">@Html.Label("Select a category for this recipe")</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      @using (Html.BeginForm())
+      {
+        <br>
+        <td>
+          @Html.TextBoxFor(model => model.RecipeName)
+        </td> 
+        <td> 
+          @Html.TextBoxFor(model => model.IngredientList)
+        </td>
+        <td> 
+          @Html.DropDownListFor(m => m.RecipeRating, Enumerable.Range(0,6).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+        </td>
+        <td> 
+          @Html.DropDownList("CategoryId")
+        </td>
+        <td>
+          <input type="submit" value="Add to recipe box" class="btn btn-outline-secondary" />
+        </td>
+      }
+      </tr>
+    </tbody>
+  </table>
+  
+
+@* <h4>Add a Recipe</h4>
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.RecipeName) 
@@ -23,6 +60,6 @@
   @Html.DropDownList("CategoryId")
 
   <input type="submit" value="Add to my recipe box" class="btn" />
-}
+} *@
 
 <br><p>@Html.ActionLink("Back to Recipe List", "Index")</p> 
