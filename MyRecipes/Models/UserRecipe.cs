@@ -24,6 +24,15 @@ namespace MyRecipes.Models
     public int RecipeRating { get; set; }
 
     public virtual ICollection<CategoryUserRecipe> JoinEntities { get; }
+
+    // public string[] CleanIngredientList (string IngredientList)
+    //   {
+    //     char[] delimiterChars = { ',', '.', ':',};
+    //     string[] separated = IngredientList.Split(delimiterChars);
+
+    //     return separated;
+          
+    //   }
   }
 }
 
