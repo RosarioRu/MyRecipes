@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyRecipes.Models;
 using System.Collections.Generic;
 using System.Linq; //this allows us to use ToList() method below
-using Microsoft.EntityFrameworkCore; //so we can use EntityState to modify Item(s).
+using Microsoft.EntityFrameworkCore; //so we can use EntityState to modify UserRecipe(s).
 
 
 namespace MyRecipes.Controllers
@@ -43,6 +43,22 @@ namespace MyRecipes.Controllers
         _db.SaveChanges();
       }
       return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public ActionResult Details(int id)
+    { //below we first say thisUserRecipe is a list of all UserRecipe(s) in database, then we 'load' the joinEntities of UserRecipes by saying .Include the UserRecipe(s) property called JoinEntities (list of relationships of UserRecipes and their categories), then load the categories by .ThenInclude the join.Category. This will return list of UserRecipes with the Categories of the CatgoryUserRecipe(s).  Finally we say the one we want is the the UserRecipe with the UserRecipeId equalling id.... I think?... so we return the UserRecipe along with associated categories object(s). ASK BECKET ABOUT THIS.
+      
+      var thisUserRecipe = _db.UserRecipes
+        .Include(UserRecipe => UserRecipe.JoinEntities)
+        .ThenInclude(join => join.Category)
+        .FirstOrDefault(UserRecipe => UserRecipe.UserRecipeId == id);
+      char[] delimiterChars = { ' ', ',', '.', ':',};
+      string textIngredients = thisUserRecipe.IngredientList;
+      string[] words = textIngredients.Split(delimiterChars);
+     
+      ViewBag.text= words;
+      return View(thisUserRecipe);
     }
 
 

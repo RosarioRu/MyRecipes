@@ -1,0 +1,52 @@
+ @{
+  Layout = "_Layout"; 
+}
+
+@model MyRecipes.Models.UserRecipe
+
+<h3>Recipe details</h3>
+
+<p>@Html.DisplayNameFor(model => model.RecipeName): @Html.DisplayFor(model => model.RecipeName)</p>
+
+<p>@Html.DisplayNameFor(model=> model.IngredientList): @Html.DisplayFor(model => model.IngredientList)</p>
+
+<p>The Ingredients:</p>
+@foreach (string word in ViewBag.text)
+{
+  <p>@($"{word}")</p>
+}
+
+
+
+
+
+
+
+
+@if (@Model.JoinEntities.Count == 0)
+{
+  <p>This recipe has no category tags yet. @Html.ActionLink("Add one!", "AddCategory", new { id = Model.UserRecipeId })</p>
+}
+else
+{
+  <h4>Categories the item belongs to:</h4>
+  <ul>
+    @foreach (var join in Model.JoinEntities)
+    {
+      <li>@join.Category.Name</li>
+      @using (Html.BeginForm("DeleteCategory", "UserRecipes"))
+      {
+        @Html.Hidden("joinId", @join.CategoryUserRecipeId)
+        <input type ="submit" value="remove category"/>
+      }<br>
+    }
+  </ul>
+}
+
+@* <p>@Html.ActionLink("Add a Category", "AddCategory", new { id = Model.ItemId })</p>
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
+
+<p>@Html.ActionLink($"Edit this item", "Edit", new {id=Model.ItemId})</p>
+
+<p>@Html.ActionLink("Delete this item", "Delete", new {id=Model.ItemId})</p> *@
