@@ -53,7 +53,7 @@ namespace MyRecipes.Controllers
         .Include(UserRecipe => UserRecipe.JoinEntities)
         .ThenInclude(join => join.Category)
         .FirstOrDefault(UserRecipe => UserRecipe.UserRecipeId == id);
-      char[] delimiterChars = { ' ', ',', '.', ':',};
+      char[] delimiterChars = { ',', '.', ':',};
       string textIngredients = thisUserRecipe.IngredientList;
       string[] words = textIngredients.Split(delimiterChars);
      
