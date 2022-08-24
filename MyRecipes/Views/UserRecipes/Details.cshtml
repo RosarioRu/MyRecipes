@@ -1,35 +1,32 @@
- @{
+@{
   Layout = "_Layout"; 
 }
 
 @model MyRecipes.Models.UserRecipe
 
-<h3>Recipe details</h3>
+<br>
+<h5>Recipe Details</h5>
+<br>
+<h6>@Html.DisplayFor(model => model.RecipeName)</h6>
 
-<p>@Html.DisplayNameFor(model => model.RecipeName): @Html.DisplayFor(model => model.RecipeName)</p>
-
-<p>@Html.DisplayNameFor(model=> model.IngredientList): @Html.DisplayFor(model => model.IngredientList)</p>
-
-<p>The Ingredients:</p>
+<br>
+<h6>Ingredients:</h6>
+<ul>
 @foreach (string word in ViewBag.text)
 {
-  <p>@($"{word}")</p>
+  <li>@($"{word}")</li>
 }
-
-
-
-
-
-
+</ul>
 
 
 @if (@Model.JoinEntities.Count == 0)
 {
+  <br>
   <p>This recipe has no category tags yet. @Html.ActionLink("Add one!", "AddCategory", new { id = Model.UserRecipeId })</p>
 }
 else
 {
-  <h4>Categories the item belongs to:</h4>
+  <h6>Categories the item belongs to:</h6>
   <ul>
     @foreach (var join in Model.JoinEntities)
     {
