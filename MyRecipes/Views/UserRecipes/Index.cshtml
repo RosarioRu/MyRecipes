@@ -20,7 +20,7 @@
     <thead>
       <tr>
         <th scope="col">Recipe</th>
-        <th scope="col">Ingredients</th>
+        <th scope="col">Edit/Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -28,14 +28,14 @@
     {
       <tr>
         <td>@Html.ActionLink($"{UserRecipe.RecipeName}", "Details", new {id=UserRecipe.UserRecipeId})</td> 
-        <td>@Html.Display($"{UserRecipe.IngredientList}")</td>
+        <td>@Html.ActionLink("", "Edit", new {id=($"{UserRecipe.UserRecipeId}")}, new {@class="fas fa-pencil-alt" })</td>
       </tr>
     }
     </tbody>
   </table>
   }
 
-  <br><br><h3>@Html.ActionLink("Add a Recipe", "Create", "UserRecipes")</h3>
+  <br><h3>@Html.ActionLink("Add a Recipe", "Create", "UserRecipes")</h3>
   
     
 </div>
