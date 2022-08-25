@@ -56,7 +56,7 @@ namespace MyRecipes.Controllers
     [HttpGet]
     public ActionResult Details(int id)
     { //below we first say thisUserRecipe is a list of all UserRecipe(s) in database, then we 'load' the joinEntities of UserRecipes by saying .Include the UserRecipe(s) property called JoinEntities (list of relationships of UserRecipes and their categories), then load the categories by .ThenInclude the join.Category. This will return list of UserRecipes with the Categories of the CatgoryUserRecipe(s).  Finally we say the one we want is the the UserRecipe with the UserRecipeId equalling id.... I think?... so we return the UserRecipe along with associated categories object(s). ASK BECKET ABOUT THIS.
-      
+      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
       var thisUserRecipe = _db.UserRecipes
         .Include(UserRecipe => UserRecipe.JoinEntities)
         .ThenInclude(join => join.Category)
@@ -68,6 +68,8 @@ namespace MyRecipes.Controllers
       ViewBag.text= words;
       return View(thisUserRecipe);
     }
+
+    
 
     [HttpGet]
     public ActionResult Edit(int id)

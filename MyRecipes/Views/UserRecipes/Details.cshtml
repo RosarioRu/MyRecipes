@@ -22,7 +22,9 @@
 @if (@Model.JoinEntities.Count == 0)
 {
   <br>
-  <p>This recipe has no category tags yet. @Html.ActionLink("Add one!", "AddCategory", new { id = Model.UserRecipeId })</p>
+  <p>This recipe has no category tags yet.</p>
+  <p>@Html.ActionLink($"Add one!", "Edit", new {id=Model.UserRecipeId})</p>
+
 }
 else
 {
@@ -38,6 +40,7 @@ else
       }<br>
     }
   </ul>
+  @Html.ActionLink("Edit Recipe", "Edit", new {id=($"{Model.UserRecipeId}")})
 }
 
 @* <p>@Html.ActionLink("Add a Category", "AddCategory", new { id = Model.ItemId })</p>
