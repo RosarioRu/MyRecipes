@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using MyRecipes.Models;
 using System.Collections.Generic;
 using System.Linq; //this allows us to use ToList() method below
+
+using System;
+
 using Microsoft.EntityFrameworkCore; //so we can use EntityState to modify UserRecipe(s).
 
 
@@ -28,9 +31,14 @@ namespace MyRecipes.Controllers
     [HttpGet]
     public ActionResult Create()
     {
-      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");//might put this in edit() so that user can add multiple categories not just ONE...at one time
+      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
       return View();
     }
+
+    
+
+
+
 
     [HttpPost]
     public ActionResult Create(UserRecipe userRecipe, int CategoryId)
@@ -65,7 +73,11 @@ namespace MyRecipes.Controllers
     public ActionResult Edit(int id)
     {
       ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
-      var recipeToDisplay = _db.UserRecipes.FirstOrDefault(UserRecipe => UserRecipe.UserRecipeId == id);
+      // var recipeToDisplay = _db.UserRecipes.FirstOrDefault(UserRecipe => UserRecipe.UserRecipeId == id);
+      var recipeToDisplay = _db.UserRecipes
+        .Include(UserRecipe => UserRecipe.JoinEntities)
+        .ThenInclude(join => join.Category)
+        .FirstOrDefault(UserRecipe => UserRecipe.UserRecipeId == id);
       return View(recipeToDisplay);
     }
 

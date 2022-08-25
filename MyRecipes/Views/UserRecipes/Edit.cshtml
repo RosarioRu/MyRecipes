@@ -31,8 +31,21 @@
     </tr>
     <tr>
       <td>
-        @Html.Label("Select a category for this recipe")
-        @Html.DropDownList("CategoryId")
+        @if (@Model.JoinEntities.Count == 0)
+        {
+          <p>This recipe has no category tags yet.</p>
+        }
+        else 
+        {
+          @Html.Label("Current Category Tags:")
+          @foreach (var join in Model.JoinEntities)
+          {
+            <p>@join.Category.Name</p>
+          }
+        }
+
+        @Html.Label("Add a category to this recipe")
+        @Html.DropDownList("CategoryId", "none")
       </td>
     </tr>
     <tr>

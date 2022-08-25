@@ -33,7 +33,7 @@
           @Html.DropDownListFor(m => m.RecipeRating, Enumerable.Range(0,6).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
         </td>
         <td> 
-          @Html.DropDownList("CategoryId")
+          @Html.DropDownList("CategoryId","none")
         </td>
         <td>
           <input type="submit" value="Add to recipe box" class="btn btn-outline-secondary" />
