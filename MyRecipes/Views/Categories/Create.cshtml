@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+@using MyRecipes.Models
+@model MyRecipes.Models.Category 
+
+<h5>Add a New Recipe Category</h5>
+ 
+@using (Html.BeginForm())//BeginForm() sends HTTP POST request by default to the current URL. This form will send a post request to the CREATE() route (to /Categories/Create). This is why we're not using RESTful routing
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+  <input type="submit" value="Add this new Category"/>
+}

@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+@using MyRecipes.Models
+@model List<MyRecipes.Models.Category>;
+
+@if (Model.Count == 0)
+{
+  <h3>No Categories have been entered yet</h3>
+  <p>@Html.ActionLink("Add a Category", "Create")</p>
+}
+else 
+{
+<ul>
+  @foreach (Category category in Model)
+  {
+    <li>@Html.ActionLink($"{category.Name}", "Details", new {id=category.CategoryId})</li>
+    // third variable being passed into the ActionLink is a new kind of varible (new {id=category.CategoryId}) is an anonymous object with the property, id. This is how .NET knows which id to use when it routes to the Details() action. property names of the object we pass in MUST match parameter names used by the taraget method. In this case, in the controller: Details(int id).  
+  }
+</ul>
+
+<p>@Html.ActionLink("Add another Category", "Create")</p>
+}
+
+
+  
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
