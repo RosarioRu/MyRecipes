@@ -64,7 +64,6 @@ namespace MyRecipes.Controllers
       char[] delimiterChars = { ',', '.', ':',};
       string textIngredients = thisUserRecipe.IngredientList;
       string[] words = textIngredients.Split(delimiterChars);
-     
       ViewBag.text= words;
       return View(thisUserRecipe);
     }
@@ -111,5 +110,13 @@ namespace MyRecipes.Controllers
       return RedirectToAction("Index");
     }
 
+    [HttpPost, ActionName("DeleteCategoryUserRecipe")]
+    public ActionResult DetailsAgain(int joinId)
+    {
+      var joinEntry = _db.CategoryUserRecipes.FirstOrDefault(entry => entry.CategoryUserRecipeId == joinId);
+      _db.CategoryUserRecipes.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }   
   }
 }
